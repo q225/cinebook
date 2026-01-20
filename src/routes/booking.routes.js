@@ -22,6 +22,9 @@ router.post('/:bookingId/confirm', confirmBookingValidator, validate, bookingCon
 router.post('/:bookingId/cancel', cancelBookingValidator, validate, bookingController.cancelBooking);
 router.get('/my-bookings', bookingController.getMyBookings);
 router.get('/:bookingId', bookingController.getBooking);
+router.get('/:movieId/shows', bookingController.getMovieShows);
+router.get('/:theaterId/shows', bookingController.getTheaterShows);
+router.get('/:showId/seats', bookingController.getShowSeats);
 
 // Admin routes
 router.post('/release-expired', adminOnly, bookingController.releaseExpired);

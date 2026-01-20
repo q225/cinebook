@@ -23,6 +23,20 @@ const cancelBookingValidator = [
   body('reason').optional().isString(),
 ];
 
+const getMovieShowsValidator = [
+  param('movieId').isUUID().withMessage('Valid movie ID required'),
+  query('date').optional().isDate().withMessage('Valid date required'),
+];
+
+const getTheaterShowsValidator = [
+  param('theaterId').isUUID().withMessage('Valid theater ID required'),
+  query('date').optional().isDate().withMessage('Valid date required'),
+];
+
+const getShowSeatsValidator = [
+  param('showId').isUUID().withMessage('Valid show ID required'),
+];
+
 module.exports = {
   initiateBookingValidator,
   confirmBookingValidator,

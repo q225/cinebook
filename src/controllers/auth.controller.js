@@ -53,4 +53,54 @@ const getProfile = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, refreshToken, logout, getProfile };
+const changePassword = async (req, res, next) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    await authService.changePassword(req.user.userId, currentPassword, newPassword);
+    return success(res, null, 'Password changed successfully');
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateProfile = async (req, res, next) => {
+  try {
+    const { firstName, lastName, bio, avatar, email, password, confirmPassword } = req.body;
+    await authService.updateProfile(req.user.userId, firstName, lastName, bio, avatar, email, password, confirmPassword );
+    return success(res, null, 'Profile updated successfully');
+  } catch (error) {
+    next(error);
+  }
+};
+
+const forgotPassword = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    await authService.forgotPassword(email);
+    return success(res, null, 'Password reset email sent');
+  } catch (error) {
+    next(error);
+  }
+};
+
+const resetPassword = async (req, res, next) => {
+  try {
+    const { token, password } = req.body;
+    await authService.resetPassword(token, password);
+    return success(res, null, 'Password reset successfully');
+  } catch (error) {
+    next(error);
+  }
+};
+
+const verifyEmail = async (req, res, next) => {
+  try {
+    const { token } = req.body;
+    await authService.verifyEmail(token);
+    return success(res, null, 'Email verified successfully');
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, refreshToken, logout, getProfile, changePassword, updateProfile, forgotPassword, resetPassword };

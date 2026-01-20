@@ -61,6 +61,17 @@ const getMoviesByCity = async (req, res, next) => {
   }
 };
 
+const getMovieShows = async (req, res, next) => {
+  try {
+    const { movieId } = req.params;
+    const { date } = req.query;
+    const shows = await movieService.getMovieShows(movieId, date);
+    return success(res, { shows }, 'Movie shows retrieved');
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getMovies,
   getMovie,

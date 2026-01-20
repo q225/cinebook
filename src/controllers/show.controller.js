@@ -54,6 +54,7 @@ const getAvailableDates = async (req, res, next) => {
   }
 };
 
+
 module.exports = {
   getShowsForMovie,
   getShowWithSeats,

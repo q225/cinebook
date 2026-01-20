@@ -89,6 +89,15 @@ const releaseExpired = async (req, res, next) => {
   }
 };
 
+const getBookings = async (req, res, next) => {
+  try {
+    const result = await bookingService.getBookings(req.query);
+    return paginated(res, result.bookings, result, 'Bookings retrieved');
+  } catch (error) {
+    next(error);
+  }
+};   
+
 module.exports = {
   initiateBooking,
   confirmBooking,

@@ -68,6 +68,30 @@ const getCities = async (req, res, next) => {
   }
 };
 
+const getAvailableDates = async (req, res, next) => {
+  try {
+    const { theaterId } = req.params;
+    const { movieId } = req.query;
+    const dates = await theaterService.getAvailableDates(theaterId, movieId);
+    return success(res, { dates }, 'Available dates retrieved');
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getTheaterShows = async (req, res, next) => {
+  try {
+    const { theaterId } = req.params;
+    const { movieId } = req.query;
+    const shows = await theaterService.getTheaterShows(theaterId, movieId);
+    return success(res, { shows }, 'Theater shows retrieved');
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
 module.exports = {
   getTheaters,
   getTheater,
